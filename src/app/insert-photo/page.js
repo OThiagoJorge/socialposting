@@ -6,6 +6,12 @@ import Logo from '../components/logo'
 import { useRouter } from 'next/navigation'
 function InsertPhoto() {
   const router = useRouter()
+  const goToFeed = () => {
+    return router.push('/feed')
+  }
+  const backPage = () => {
+    return router.push('/')
+  }  
   return (
       <div className='bg-gray-300 h-screen overflow-y-hidden'>
         <Logo />
@@ -23,10 +29,10 @@ function InsertPhoto() {
               </label>
           </div>
           <div className='flex flex-col items-center'> 
-          <button type="submit" className="block mt-4 bg-blue-700 text-white rounded-full pt-3 px-10 py-3 hover:bg-blue-500 duration-100">Enviar</button>
+          <button onClick={goToFeed} type="submit" className="block mt-4 bg-blue-700 text-white rounded-full pt-3 px-10 py-3 hover:bg-blue-500 duration-100">Enviar</button>
             <div className='mt-4 flex flex-row items-center'>
               <ArrowBackIcon fontSize='medium'/>
-              <button onClick={() => router.push('/')} className='text-base'>Voltar</button>
+              <button onClick={backPage} className='text-base'>Voltar</button>
             </div>
           </div>
           </form>

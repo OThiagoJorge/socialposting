@@ -1,6 +1,4 @@
 import '../globals.css'
-import PublishIcon from '@mui/icons-material/Publish'
-import FileUploadIcon from '@mui/icons-material/FileUpload'
 const Post = () => {
     return (
         <div className='relative w-1/2 mx-auto bg-gradient-to-b from-blue-100 via-blue-200 to-blue-300 drop-shadow-lg rounded-3xl mt-10 h-96'>
@@ -13,7 +11,7 @@ const Post = () => {
                 </a>
             </div>
             <div className='absolute bg-white rounded-3xl w-5/6 h-4/5 mt-14 mb-14 mx-14'>
-                <img src='../public/meme.png' className='h-full rounded-3xl'></img>
+                <img src='meme.png' className='h-full rounded-3xl'></img>
             </div>
         </div>
     )
