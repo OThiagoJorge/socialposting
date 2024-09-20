@@ -1,7 +1,14 @@
+'use client'
 import '../globals.css'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import SearchIcon from '@mui/icons-material/Search'
+import { useRouter } from 'next/navigation'
 const Navbar = () => {
+    const router = useRouter()
+    const handleClick = () => {
+        return router.push('/login')
+    }
+
     return (
         <div className='z-50 px-3 items-center justify-between flex fixed bg-gradient-to-b from-blue-500 via-blue-600 to-blue-700 drop-shadow-2xl text-white font-extrabold text-xl h-14 w-full'>
             <p className=''>[Social Posting]</p>
@@ -16,7 +23,7 @@ const Navbar = () => {
             </label>
             </div> 
             <div className='flex items-center'>
-                <button className='rounded-full border-black border-2 w-12 h-12'>
+                <button onClick={handleClick} className='rounded-full border-black border-2 w-12 h-12'>
                         <img alt="Profile" />
                 </button>
                 <button className='rounded-full border-black border-2 w-12 h-12 ml-3'>
