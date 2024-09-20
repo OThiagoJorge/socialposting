@@ -1,16 +1,15 @@
-'use client'
 import './globals.css'
-import { ApolloProvider } from '@apollo/client'
-import client from './apolloclient'
-import InsertName from './page'
 
-export default function Layout(){
+export default function Layout({children}){
   return (
     <html lang="pt-br">
+      <head>
+        <title>Social Posting</title>
+        <meta charSet='utf-8'/>
+        <link rel="icon" type="image/x-icon" href="/icon.png"></link>
+      </head>
       <body>
-        <ApolloProvider client={client}>
-          <InsertName />
-        </ApolloProvider>
+          {children}
       </body>
     </html>
   )
