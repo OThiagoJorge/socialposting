@@ -17,12 +17,12 @@ const Post = () => {
     return (
         <div className='relative w-1/2 mx-auto bg-gradient-to-b from-blue-100 via-blue-200 to-blue-300 drop-shadow-lg rounded-3xl mt-10 h-96 overflow-hidden'>
             <div className='flex items-center p-4'>
-                <button className='rounded-full border-black border-2 w-12 h-12 overflow-hidden'>
-                    <img src='/profile.jpg' alt="Profile" className='object-cover w-full h-full' />
+                <button className='rounded-full w-12 h-12 overflow-hidden'>
+                    <img src='perfil.jpg' alt="Profile" className='object-cover w-full h-full' />
                 </button>
                 <div className='flex flex-col'>
                     <a className='ml-3 cursor-pointer'>
-                        <h1 className='font-extrabold text-lg'>Fulano de tal</h1>
+                        <h1 className='font-extrabold text-lg'>Thiago Jorge</h1>
                     </a>
                     <p className='ml-3 text-gray-700'>Há 2 horas</p>
                 </div>

@@ -8,10 +8,13 @@ const Navbar = () => {
     const handleClick = () => {
         return router.push('/login')
     }
+    const goToFeed = () => {
+        return router.push('/')
+    }
 
     return (
         <div className='z-50 px-3 items-center justify-between flex fixed bg-gradient-to-b from-blue-500 via-blue-600 to-blue-700 drop-shadow-2xl text-white font-extrabold text-xl h-14 w-full'>
-            <p className=''>[Social Posting]</p>
+            <button onclick={goToFeed} className=''>[Social Posting]</button>
             <div className='rounded-full'>
             <label className='mt-2 w-4/5 md:w-96 h-10 rounded-full focus:drop-shadow-md focus:outline-none text-xl border-2 px-4 bg-white'>
                   <input 
