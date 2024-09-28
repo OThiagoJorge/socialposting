@@ -1,28 +1,39 @@
 'use client'
 import '../globals.css'
-import { useRouter } from 'next/navigation'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import { useState } from 'react'
+import { Authenticator } from '@aws-amplify/ui-react'
+import '@aws-amplify/ui-react/styles.css'
 
 const Login = () => {
-    const [showPassword, setShowPassword] = useState(false)
-    const router = useRouter()
-
-    const handleClick = () => {
-      return router.push('/')
-    }
-
-    const goToRegister = () => {
-      return router.push('/register')
-    }
-
-    const togglePasswordVisibility = () => {
-      setShowPassword((prevShowPassword) => !prevShowPassword)
-    }
 
     return (
-        <div className='bg-gray-100 h-screen overflow-y-hidden'>
+      <div className='bg-gray-100 h-full'>
+        <div className="grid gap-4 grid-cols-1 w-auto justify-center relative">
+          <h1 className="font-black text-4xl md:text-5xl block text-center mt-16">Bem-vindo!</h1>
+          <Authenticator 
+            formFields={{
+                    signIn: {
+                    username: {
+                        placeholder: 'Digite seu nome de usuário',
+                        className: 'block mt-2 rounded-full w-4/5 md:w-96 h-10 focus:drop-shadow-md focus:outline-none align-middle text-xl px-5 text-center border-2'
+                    },
+                    password: {
+                        placeholder: 'Digite sua senha',
+                        className: 'border-2 border-gray-300 rounded-lg p-2'
+                    },
+                    },
+                }}
+            >
+          </Authenticator>
+        </div>
+      </div>
+    )
+}
+
+export default Login
+
+
+/*
+  <div className='bg-gray-100 h-screen overflow-y-hidden'>
             <div className="grid gap-4 grid-cols-1 w-auto justify-center relative mt-32">
               <h1 className="font-black text-4xl md:text-5xl block text-center mt-0">Bem-vindo!</h1>
               <form className="flex flex-col items-center mt-4">
@@ -36,17 +47,11 @@ const Login = () => {
                   <input 
                     className='flex-grow h-full text-center focus:outline-none bg-transparent' 
                     placeholder="Senha" 
-                    type={showPassword ? "text" : "password"}
                     id='passwordInput' 
                   />
-                  {showPassword ? (
-                    <VisibilityIcon className='cursor-pointer' onClick={togglePasswordVisibility} />
-                  ) : (
-                    <VisibilityOffIcon className='cursor-pointer' onClick={togglePasswordVisibility} />
-                  )}
                 </label>
 
-                <button onClick={handleClick} type="submit" className="block w-4/5 md:w-96 h-10 align-middle text-center mt-4 bg-blue-700 text-white rounded-full hover:bg-blue-500 duration-100">
+                <button type="submit" className="block w-4/5 md:w-96 h-10 align-middle text-center mt-4 bg-blue-700 text-white rounded-full hover:bg-blue-500 duration-100">
                   Entrar
                 </button>
                 <div className="flex items-center">
@@ -55,10 +60,7 @@ const Login = () => {
                 </div>
               </form>
               <button className="mt-0 text-blue-700 hover:underline">Esqueceu sua senha?</button>
-              <button onClick={goToRegister} className="mt-0 text-blue-700 hover:underline">Não possui uma conta? Cadastre-se</button>
+              <button className="mt-0 text-blue-700 hover:underline">Não possui uma conta? Cadastre-se</button>
             </div>
         </div>
-    )
-}
-
-export default Login
+  */

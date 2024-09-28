@@ -11,6 +11,9 @@ const Navbar = () => {
     const goToFeed = () => {
         return router.push('/')
     }
+    const goToLogin = () => {
+        return router.push('/login')
+    }
 
     return (
         <div className='z-50 px-3 items-center justify-between flex fixed bg-gradient-to-b from-blue-500 via-blue-600 to-blue-700 drop-shadow-2xl text-white font-extrabold text-xl h-14 w-full'>
@@ -29,9 +32,14 @@ const Navbar = () => {
                 <button className='rounded-full w-12 h-12 ml-3'>
                     <DarkModeIcon />
                 </button>
-                <button onClick={handleClick} className='rounded-full w-12 h-12 overflow-hidden'>
+                {/*<button onClick={handleClick} className='rounded-full w-12 h-12 overflow-hidden'>
                     <img src='perfil.jpg' alt="Profile" className='object-cover w-full h-full' />
-                </button>
+                </button>*/}
+                <div className='w-32 h-12 rounded-2xl bg-white'>
+                    <button onClick={goToLogin} className="w-32 h-12 rounded-2xl z-10 bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 text-white hover:opacity-85">
+                        Login
+                    </button>
+                </div>
             </div>
         </div>)
     }
