@@ -10,18 +10,7 @@ const Login = () => {
         <div className="grid gap-4 grid-cols-1 w-auto justify-center relative">
           <h1 className="font-black text-4xl md:text-5xl block text-center mt-16">Bem-vindo!</h1>
           <Authenticator 
-            formFields={{
-                    signIn: {
-                    username: {
-                        placeholder: 'Digite seu nome de usuário',
-                        className: 'block mt-2 rounded-full w-4/5 md:w-96 h-10 focus:drop-shadow-md focus:outline-none align-middle text-xl px-5 text-center border-2'
-                    },
-                    password: {
-                        placeholder: 'Digite sua senha',
-                        className: 'border-2 border-gray-300 rounded-lg p-2'
-                    },
-                    },
-                }}
+            className='mb-16'
             >
           </Authenticator>
         </div>
