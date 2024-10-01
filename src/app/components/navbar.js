@@ -11,8 +11,8 @@ const Navbar = () => {
     const goToFeed = () => {
         return router.push('/')
     }
-    const goToLogin = () => {
-        return router.push('/login')
+    const goToProfile = () => {
+        return router.push('/profile')
     }
 
     return (
@@ -36,7 +36,7 @@ const Navbar = () => {
                     <img src='perfil.jpg' alt="Profile" className='object-cover w-full h-full' />
                 </button>*/}
                 <div className='w-32 h-12 rounded-2xl bg-white'>
-                    <button onClick={goToLogin} className="w-32 h-12 rounded-2xl z-10 bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 text-white hover:opacity-85">
+                    <button onClick={goToProfile} className="w-32 h-12 rounded-2xl z-10 bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 text-white hover:opacity-85">
                         Login
                     </button>
                 </div>

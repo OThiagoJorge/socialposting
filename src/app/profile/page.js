@@ -4,16 +4,17 @@ import Navbar from '../components/navbar'
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera'
 import Post from '../components/post'
 import ChatIcon from '@mui/icons-material/Chat'
-import { Authenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
+import { Amplify } from 'aws-amplify'
+import { withAuthenticator } from '@aws-amplify/ui-react'
+import config from '../amplifyconfiguration.json'
 
-const Profile = () => {
+Amplify.configure(config)
+
+const Profile = ({ signOut, user }) => {
     return (
         <div className=''> 
             <h1 className="font-black text-4xl md:text-5xl block text-center mt-16 mb-4">Bem-vindo!</h1>
-            <Authenticator
-                className='mb-16'    
-            >
                 {({ signOut, user }) => (
                     <main>
                         <div className='h-screen'>
@@ -53,9 +54,8 @@ const Profile = () => {
                     <button onClick={signOut}>Sign out</button>
                 </main>
             )}
-            </Authenticator>
         </div>
     )
 }
 
-export default Profile
+export default withAuthenticator(Profile)
