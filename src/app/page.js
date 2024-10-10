@@ -14,7 +14,8 @@ const Feed = () => {
                     <Post />
                     <Post />
                 </div>
-                <div className='w-7 h-7 bg-black relative fixed '></div>
+                {/* Back to top button in progress */}
+                <button className='w-7 h-7 bg-black relative'></button>
             </div>
     )
 }
