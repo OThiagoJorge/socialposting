@@ -40,10 +40,10 @@ const PostMedia = () => {
 }
 
 const Like = () => {
-    const [showPassword, setShowPassword] = useState(false)
+    const [heartRed, setHeart] = useState(false)
 
-    const togglePasswordVisibility = () => {
-        setShowPassword((prevShowPassword) => !prevShowPassword)
+    const toggleHeartChange = () => {
+        setHeart(() => !heartRed)
     }
 
     return (
@@ -52,17 +52,17 @@ const Like = () => {
                 <p className='transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-white hover:text-black rounded-md duration-300'>Curtidas</p>
             </button>
             <button className='row-span-2 flex basis-1/4 items-start mt-1 justify-center text-black text-sm'>
-            {showPassword ? (
+            {heartRed ? (
                 <FavoriteIcon 
                     className='cursor-pointer text-base text-red-600' 
-                    onClick={togglePasswordVisibility} 
+                    onClick={toggleHeartChange} 
                 />
             ) 
                 : 
             (
                 <FavoriteBorderIcon 
                     className='cursor-pointer text-base' 
-                    onClick={togglePasswordVisibility} 
+                    onClick={toggleHeartChange} 
                 />
             )}
             </button>
