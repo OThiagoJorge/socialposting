@@ -3,28 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"next dev\" \"cd backend && node index.js\"",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@aws-amplify/sandbox": "^1.2.2",
-    "@aws-amplify/ui-react": "^6.5.1",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.16.7",
-    "concurrently": "^8.2.2",
-    "next": "^14.2.13",
+    "firebase": "^11.0.1",
+    "next": "^15.0.2",
     "react": "^18",
     "react-dom": "^18",
-    "react-hook-form": "^7.53.0",
-    "webpack": "^5.95.0"
+    "react-hook-form": "^7.53.0"
   },
   "devDependencies": {
+    "constructs": "^10.4.2",
+    "esbuild": "^0.24.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.6",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1"
-  }
+    "tailwindcss": "^3.4.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "tailwind.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
