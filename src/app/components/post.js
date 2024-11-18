@@ -11,7 +11,7 @@ const ShareIcon = dynamic(() => import('@mui/icons-material/Share'))
 const FavoriteIcon = dynamic(() => import('@mui/icons-material/Favorite'))
 const MoreHorizIcon = dynamic(() => import('@mui/icons-material/MoreHoriz'))
 
-const PostAuthor = ({ onEventTrigger }) => {
+const PostAuthor = ({ onEventTrigger, name }) => {
     const handleMouseOver = () => onEventTrigger(true)
     const handleMouseOut = () => onEventTrigger(false)
 
@@ -33,7 +33,7 @@ const PostAuthor = ({ onEventTrigger }) => {
                         onMouseOver={handleMouseOver}
                         onMouseOut={handleMouseOut}
                     >
-                        Thiago Jorge
+                        {name}
                     </h1>
                 </a>
                 <p className='ml-3 text-gray-700 hover:underline hover:cursor-pointer'>Há 2 horas</p>
@@ -100,13 +100,13 @@ const PostAction = ({ label, icon }) => {
     )
 }
 
-const Post = ({ onEventTrigger }) => {
+const Post = ({ onEventTrigger, nameup }) => {
     const handleEventTrigger = (isHoverProfile) => onEventTrigger(isHoverProfile)
 
     return (
         <div className='relative w-full md:w-1/2 mx-auto bg-white md:rounded-2xl mt-10 h-auto overflow-hidden border-b-4 border-gray-300'>
             <div className='flex justify-between'>
-                <PostAuthor onEventTrigger={handleEventTrigger} />
+                <PostAuthor onEventTrigger={handleEventTrigger} name={nameup}/>
                 <button className='flex justify-center align-middle text-black w-7 h-7 rounded-full mr-3 mt-3 hover:bg-gray-200'>
                     <MoreHorizIcon className='mx-auto my-auto' />
                 </button>

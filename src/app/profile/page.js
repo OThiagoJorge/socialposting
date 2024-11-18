@@ -49,7 +49,7 @@ const ProfileImages = () => {
     )
 }
 
-const Profile = ({ signOut, user }) => {
+const Profile = (props) => {
     const [isClickedTopProfile, setIsClickedTopProfile] = useState(false)
     const [isHovered, setIsHovered] = useState(false)
     const [hasWindow, setHasWindow] = useState(false)
@@ -75,21 +75,21 @@ const Profile = ({ signOut, user }) => {
         <div>
             <main className='bg-gray-100 h-full'>
                 <div className=''>
-                    <Navbar signOut={signOut} onProfileTrigger={handleProfileTrigger} />
+                    <Navbar onProfileTrigger={handleProfileTrigger} />
                     {hasWindow && isHovered && (
                         <div
                             onMouseOver={() => handleEventTrigger(true)}
                             onMouseOut={handleMouseOut}
                             className='mt-44 fixed bg-white h-60 w-96 z-40 ml-64 rounded-xl drop-shadow-lg'
                         >
-                            Thiago Jorge
+                            {props.name}
                         </div>
                     )}
                     <ProfileImages />
-                    <h1 className='ml-80 mt-2 text-4xl font-bold'>Thiago Jorge</h1>
+                    <h1 className='ml-80 mt-2 text-4xl font-bold'>{props.name}</h1>
                     <p className='ml-80 mt-2 text-2xl font-bold'>Online</p>
                     {[...Array(12)].map((_, index) => (
-                        <Post key={index} onEventTrigger={handleEventTrigger} />
+                        <Post key={index} onEventTrigger={handleEventTrigger} nameup={props.name} />
                     ))}
                     {isClickedTopProfile && (
                         <div className='bg-white w-60 h-auto fixed z-50 right-5 rounded-b-lg drop-shadow-lg mt-14'>
