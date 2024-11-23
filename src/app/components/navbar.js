@@ -2,7 +2,7 @@
 import '../globals.css'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import { useRouter } from 'next/navigation'
-import Search from '/home/thiago/Área de trabalho/socialposting/src/app/components/subcomponents/search.js'
+import Search from '@subcomponents/search.js'
 import ChatIcon from '@mui/icons-material/Chat'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'

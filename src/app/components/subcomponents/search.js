@@ -1,5 +1,5 @@
 'use client'
-import '/home/thiago/Área de trabalho/socialposting/src/app/globals.css'
+import './globals.css'
 import SearchIcon from '@mui/icons-material/Search'
 
 const Search = () => {
