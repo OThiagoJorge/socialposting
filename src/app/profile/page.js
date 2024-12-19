@@ -2,7 +2,6 @@
 import '../globals.css'
 import dynamic from 'next/dynamic'
 import Navbar from '../components/navbar'
-import Post from '../components/post'
 import { useState, useEffect } from 'react'
 
 // Importação dinâmica dos ícones
@@ -14,40 +13,41 @@ const SettingsIcon = dynamic(() => import('@mui/icons-material/Settings'))
 const QuestionMarkIcon = dynamic(() => import('@mui/icons-material/QuestionMark'))
 const DarkModeIcon = dynamic(() => import('@mui/icons-material/DarkMode'))
 
-const ProfileImages = () => {
+const ProfileImages = ({ user }) => {
+    if (!user) return <div>Carregando...</div>;
+  
     return (
-        <div className="relative w-full flex justify-center">
-            <button className="w-3/4 bg-gradient-to-b from-blue-100 via-blue-200 to-blue-300 drop-shadow-lg rounded-b-2xl h-72 overflow-hidden flex justify-center items-center hover:opacity-85">
-                <img 
-                    src="capa.jpg" 
-                    className="object-cover w-full h-full" 
-                    alt="Background Image"
-                />
-            </button>
-            <button className="absolute top-60 right-40 w-10 h-10 rounded-full z-10 border-4 border-white overflow-hidden bg-white">
-                <PhotoCameraIcon className="object-cover w-full h-full hover:opacity-85" />
-            </button>
-            <div className="flex justify-center">
-                <button className="absolute left-48 top-60 w-32 h-32 rounded-full z-10 border-4 border-white overflow-hidden bg-white">
-                    <img 
-                        src="perfil.jpg" 
-                        className="object-cover w-full h-full hover:opacity-85" 
-                        alt="Profile Image"
-                    />
-                </button>
-                <button className="absolute left-72 top-80 w-10 h-10 rounded-full z-10 border-4 border-white overflow-hidden bg-white">
-                    <PhotoCameraIcon className="object-cover w-full h-full hover:opacity-85" />
-                </button>
-                <div className='absolute right-44 top-72 w-32 h-12 rounded-xl bg-white'>
-                    <button className="w-32 h-12 rounded-xl z-10 bg-blue-500 text-white hover:opacity-85">
-                        Conversar
-                        <ChatIcon />
-                    </button>
-                </div>
-            </div>
-        </div>
-    )
-}
+      <div className="relative w-full flex justify-center z-0">
+        {/* Imagem de capa */}
+        <button className="w-full md:mx-10 bg-gradient-to-b from-blue-100 via-blue-200 to-blue-300 drop-shadow-lg md:rounded-b-2xl h-48 md:h-72 overflow-hidden flex justify-center items-center hover:opacity-85">
+          {user.wallpaperUrl ? (
+            <img 
+              src={user.wallpaperUrl} 
+              className="object-cover w-full h-full" 
+              alt="Background Image"
+            />
+          ) : (
+            <div className="text-gray-500">Sem imagem de capa</div>
+          )}
+        </button>  
+  
+        {/* Imagem de perfil */}
+          <button className="absolute mt-32 md:mt-56 w-32 h-32 rounded-full z-10 border-4 border-white overflow-hidden bg-white">
+            {user.profilePhotoUrl ? (
+              <img 
+                src={user.profilePhotoUrl} 
+                className="object-cover w-full h-full hover:opacity-85" 
+                alt="Profile Image"
+              />
+            ) : (
+              <div className="text-gray-500 flex justify-center items-center h-full">
+                Sem foto de perfil
+              </div>
+            )}
+          </button>
+      </div>
+    );
+  };
 
 const Profile = (props) => {
     const [isClickedTopProfile, setIsClickedTopProfile] = useState(false)
@@ -72,25 +72,11 @@ const Profile = (props) => {
     const handleMouseOut = () => setIsHovered(false)
 
     return (
-        <div>
-            <main className='bg-gray-100 h-full'>
+        <div className='bg-gray-100 w-screen h-screen'>
+            <div className='bg-gray-100 w-full h-full z-0 fixed'></div>
+            <main className=''>
                 <div className=''>
                     <Navbar onProfileTrigger={handleProfileTrigger} />
-                    {hasWindow && isHovered && (
-                        <div
-                            onMouseOver={() => handleEventTrigger(true)}
-                            onMouseOut={handleMouseOut}
-                            className='mt-44 fixed bg-white h-60 w-96 z-40 ml-64 rounded-xl drop-shadow-lg'
-                        >
-                            {props.name}
-                        </div>
-                    )}
-                    <ProfileImages />
-                    <h1 className='ml-80 mt-2 text-4xl font-bold'>{props.name}</h1>
-                    <p className='ml-80 mt-2 text-2xl font-bold'>Online</p>
-                    {[...Array(12)].map((_, index) => (
-                        <Post key={index} onEventTrigger={handleEventTrigger} nameup={props.name} />
-                    ))}
                     {isClickedTopProfile && (
                         <div className='bg-white w-60 h-auto fixed z-50 right-5 rounded-b-lg drop-shadow-lg mt-14'>
                             <button className='flex justify-start items-center w-full h-20 hover:bg-gray-100 p-3 font-bold'>
@@ -123,6 +109,20 @@ const Profile = (props) => {
                             </button>
                         </div>
                     )}
+                    {hasWindow && isHovered && (
+                        <div
+                            onMouseOver={() => handleEventTrigger(true)}
+                            onMouseOut={handleMouseOut}
+                            className='mt-44 fixed bg-white h-60 w-96 z-40 ml-64 rounded-xl drop-shadow-lg'
+                        >
+                            {props.user.name}
+                        </div>
+                    )}
+                      <ProfileImages user={props.user} />
+                    <div className='relative grid grid-rows-2 align-middle content-center w-full h-auto mt-16'>
+                      <div className='w-full h-full flex items-start justify-center'><h1 className='text-4xl font-bold'>{props.user.name}</h1></div>
+                      <div className='w-full h-full flex items-start justify-center'><p className='text-2xl font-bold'>Online</p></div>
+                    </div>
                 </div>
             </main>
         </div>

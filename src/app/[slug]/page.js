@@ -1,23 +1,30 @@
 import '../globals.css'
 import Profile from '../profile/page.js'
+import { collection, query, where, getDocs } from "firebase/firestore"
+import { db } from '@/firebaseconfig.js'
 
-async function fetchProfileData(slug) {
-    const response = await fetch(`http://localhost:3001/profiles/${slug}`)
-    if (!response.ok) {
-      throw new Error('Perfil não encontrado')
-    }
-    return response.json()
-}
-  
 async function Page({ params }) {
-    const { slug } = params
+  const { slug } = params
+  try {
+    const q = query(collection(db, "users"), where("slug", "==", slug))
+    const querySnapshot = await getDocs(q)
+    let userData = null
 
-    const profileData = await fetchProfileData(slug)
+    querySnapshot.forEach((doc) => {
+      userData = doc.data()
+    })
 
-    return (
-        <Profile name={profileData.nome}/>
-    )
+    if (userData) {
+      console.log("Dados do documento:", userData)
+    } else {
+      console.log("Nenhum documento encontrado!")
+    }
+
+    return <Profile user={userData} />
+  } catch (error) {
+    console.error("Erro ao buscar o documento:", error)
+    return <div>Erro ao carregar o perfil.</div>
+  }
 }
 
 export default Page
-  

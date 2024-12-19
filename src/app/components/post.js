@@ -3,7 +3,6 @@ import '../globals.css'
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 
-// Importações dinâmicas dos ícones MUI
 const FavoriteBorderIcon = dynamic(() => import('@mui/icons-material/FavoriteBorder'))
 const CommentIcon = dynamic(() => import('@mui/icons-material/Comment'))
 const RepeatIcon = dynamic(() => import('@mui/icons-material/Repeat'))
@@ -11,7 +10,7 @@ const ShareIcon = dynamic(() => import('@mui/icons-material/Share'))
 const FavoriteIcon = dynamic(() => import('@mui/icons-material/Favorite'))
 const MoreHorizIcon = dynamic(() => import('@mui/icons-material/MoreHoriz'))
 
-const PostAuthor = ({ onEventTrigger, name }) => {
+const PostAuthor = ({ onEventTrigger, name, photoUrl }) => {
     const handleMouseOver = () => onEventTrigger(true)
     const handleMouseOut = () => onEventTrigger(false)
 
@@ -19,7 +18,7 @@ const PostAuthor = ({ onEventTrigger, name }) => {
         <div className='flex items-center p-4'>
             <button className='rounded-full w-12 h-12 overflow-hidden'>
                 <img 
-                    src='/perfil.jpg' 
+                    src={photoUrl} 
                     alt="Profile" 
                     className='object-cover w-full h-full'
                     onMouseOver={handleMouseOver}
@@ -42,7 +41,7 @@ const PostAuthor = ({ onEventTrigger, name }) => {
     )
 }
 
-const PostMedia = () => {
+const PostMedia = ({mediaUrl}) => {
     const [hasWindow, setHasWindow] = useState(false)
 
     useEffect(() => {
@@ -50,9 +49,9 @@ const PostMedia = () => {
     }, [])
 
     return hasWindow ? (
-        <div className='h-auto border-b-4 border-gray-300'>
+        <div className='h-auto max-h-screen border-b-4 border-gray-300'>
             <img 
-                src='/meme.png' 
+                src={mediaUrl} 
                 alt='Post' 
                 className='h-auto w-full object-cover mx-auto' 
             />
@@ -100,18 +99,18 @@ const PostAction = ({ label, icon }) => {
     )
 }
 
-const Post = ({ onEventTrigger, nameup }) => {
+const Post = ({ onEventTrigger, postData }) => {
     const handleEventTrigger = (isHoverProfile) => onEventTrigger(isHoverProfile)
 
     return (
-        <div className='relative w-full md:w-1/2 mx-auto bg-white md:rounded-2xl mt-10 h-auto overflow-hidden border-b-4 border-gray-300'>
+        <div className='relative w-full md:w-[512px] mx-auto bg-white md:rounded-2xl mt-10 h-auto overflow-hidden border-b-4 border-gray-300'>
             <div className='flex justify-between'>
-                <PostAuthor onEventTrigger={handleEventTrigger} name={nameup}/>
+                <PostAuthor onEventTrigger={handleEventTrigger} name={postData.name} photoUrl={postData.profilePhoto}/>
                 <button className='flex justify-center align-middle text-black w-7 h-7 rounded-full mr-3 mt-3 hover:bg-gray-200'>
                     <MoreHorizIcon className='mx-auto my-auto' />
                 </button>
             </div>
-            <PostMedia />
+            <PostMedia mediaUrl={postData.file} />
             <div className='grid grid-cols-4 content-start bg-white w-full mb-0 h-16 border-t-8 border-gray-100'>
                 <Like />
                 <PostAction label='Comentários' icon={<CommentIcon className='text-base' />} />
