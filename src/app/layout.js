@@ -1,17 +1,34 @@
-import './globals.css'
+'use client'
+import '@/globals.css'
+import { AuthProvider, CommentsModalProvider } from '@/app/contexts'
+import { Navbar, NavbarOptions } from '@/app/components'
+import { useState } from 'react'
 
 export default function Layout({children}){
+  const [isClickedTopProfile, setIsCLickedTopProfile] = useState(false)
+      const handleProfileTrigger = (isProfileClicked) => {
+          if(isProfileClicked){
+              setIsCLickedTopProfile(!isClickedTopProfile)
+          }
+      }
   return (
     <html lang="pt-br">
       <head>
         <title>Social Posting</title>
         <meta charSet='utf-8'/>
         <link rel="icon" type="image/x-icon" href="/icon.png"></link>
-        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
       </head>
-      <body>
-          {children}
+      <body className='bg-gray-100'>        
+        <AuthProvider>
+          <CommentsModalProvider>
+            <Navbar onProfileTrigger={handleProfileTrigger} />
+            {isClickedTopProfile && (
+              <NavbarOptions />
+            )}
+            {children}
+          </CommentsModalProvider>
+        </AuthProvider>        
       </body>
     </html>
-  )
-}
+    
+)}

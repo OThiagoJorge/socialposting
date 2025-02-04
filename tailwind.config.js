@@ -7,6 +7,11 @@ module.exports = {
     "./node_modules/@aws-amplify/ui-react/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-  },
+      extend: {
+        colors: {
+          marrs: '#0A7E8C'
+        },
+      },
+    },  
   plugins: [],
 }
