@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import { useAuth } from '@/authContext'
+import { useAuth } from '@/app/contexts/authContext'
 
 const Login = () => {
     const { user, loading } = useAuth()
@@ -26,7 +26,9 @@ const Login = () => {
         .then((userCredential) => {
             const user = userCredential.user
             console.log("Usuário logado com sucesso: ", user)
-            localStorage.setItem('user', JSON.stringify(user))
+            if (typeof window !== 'undefined') {
+                localStorage.setItem('user', JSON.stringify(user))
+            }
             router.push('/')
         })
         .catch((error) => {

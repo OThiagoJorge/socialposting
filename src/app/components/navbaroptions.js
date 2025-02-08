@@ -33,8 +33,10 @@ const NavbarOptions = () => {
         signOut(auth)
             .then(() => {
                 console.log('Usuário deslogado com sucesso!')
-                localStorage.removeItem('user')
-                location.reload()
+                if (typeof window !== 'undefined') {
+                    localStorage.removeItem('user')
+                    location.reload()
+                }
             })
             .catch((error) => {
                 console.error("Ocorreu um erro:", error.message)

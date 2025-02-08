@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import { useAuth } from '@/authContext'
+import { useAuth } from '@/app/contexts/authContext'
 
 const Signup = () => {
   const { user, loading } = useAuth()
@@ -72,7 +72,9 @@ const Signup = () => {
       console.log("Documento criado com ID:", docRef.id)
       
       // Store user in cache
-      localStorage.setItem('user', JSON.stringify(userCredential.user))
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('user', JSON.stringify(userCredential.user))
+      }
 
       router.push(`/${slug}`)
     } catch (error) {

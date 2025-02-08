@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 
 const UploadComponent = ({ onFileSelect }) => {

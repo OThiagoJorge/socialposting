@@ -6,7 +6,7 @@ import Search from './subcomponents/search.js'
 import ChatIcon from '@mui/icons-material/Chat'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import { useAuth } from '@/app/contexts/authContext'
-import { Suspense } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 
 const Icon = ({MuiIcon}) => {
     const iconStyle = "text-black mx-auto my-auto"
@@ -27,7 +27,14 @@ const Navbar = ({ onProfileTrigger }) => {
 
     const { user, loading } = useAuth()
 
-    const cachedUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+    const [cachedUser, setCachedUser] = useState(null);
+
+    useEffect(() => {
+        const userFromStorage = localStorage.getItem('user');
+        if (userFromStorage) {
+            setCachedUser(JSON.parse(userFromStorage));
+        }
+    }, []);
 
     return (
         <div className="z-40 px-3 items-center justify-between flex fixed bg-white/85 backdrop-blur-md drop-shadow-lg font-extrabold text-sm md:text-xl h-10 md:h-14 w-screen">
