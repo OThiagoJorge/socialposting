@@ -6,9 +6,6 @@ import { db } from '@/firebaseconfig.js'
 import { Suspense } from 'react'
 
 async function fetchUserData(slug) {
-  "use cache"
-  cacheTag("articles")
-  cacheLife('hours')
   const q = query(collection(db, "users"), where("slug", "==", slug))
   const querySnapshot = await getDocs(q)
   let userData = null
@@ -22,12 +19,13 @@ function ProfileSkeleton() {
   return <div>Loading profile...</div>
 }
 
-function Page({ params }) {
-  const userDataPromise = params.then(async ({ slug }) => fetchUserData(slug))
+async function Page({ params }) {
+  const { slug } = await params
+  const userData = await fetchUserData(slug)
 
   return (
     <Suspense fallback={<ProfileSkeleton />}>
-      <Profile user={userDataPromise} />
+      <Profile user={userData} />
     </Suspense>
   )
 }

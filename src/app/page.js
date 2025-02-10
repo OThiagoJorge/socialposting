@@ -80,7 +80,7 @@ const Feed = () => {
                     example
                 </div>
             )}
-            <div className='pt-20'>
+            <div className='pt-20 md:mx-[512px]'>
                 {user && <Publish />}
                 {posts.map((post) => (
                     <div key={post.id}>

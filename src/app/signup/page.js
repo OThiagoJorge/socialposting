@@ -8,7 +8,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { InputAdornment, TextField } from '@mui/material'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import { v4 as uuidv4 } from "uuid"
-import SignupInput from '../components/signupinput'
+import { SignupInput, Navbar } from '@/app/components'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -92,6 +92,7 @@ const Signup = () => {
   }
   return (
     <div className="grid justify-center bg-gray-100 h-full pb-5 w-full">
+      <Navbar LoginOrSignup={true} />
       <div className="z-40 px-3 items-center justify-between flex fixed font-extrabold text-sm md:text-xl h-10 md:h-14 w-screen">
         <button onClick={() => router.push('/login')} className='flex items-center bg-marrs hover:bg-marrs/75 text-white w-auto px-3 py-1 h-auto rounded-lg'>
           <ArrowBackIcon />

@@ -8,6 +8,7 @@ import { useState } from 'react'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import { useAuth } from '@/app/contexts/authContext'
+import { Navbar } from '@/app/components'
 
 const Login = () => {
     const { user, loading } = useAuth()
@@ -39,8 +40,9 @@ const Login = () => {
     return (
         <>
             <div className="grid justify-center bg-gray-100 w-auto h-auto m-auto">
+                <Navbar LoginOrSignup={true} />
                 <div className="z-40 px-3 items-center justify-between flex fixed font-extrabold text-sm md:text-xl h-10 md:h-14 w-screen">
-                    <button onClick={() => router.push('/')} className='flex items-center bg-marrs hover:bg-marrs/75 text-white w-auto px-3 py-1 h-auto rounded-lg'>
+                    <button onClick={() => router.push('/')} className='z-50 flex items-center bg-marrs hover:bg-marrs/75 text-white w-auto px-3 py-1 h-auto rounded-lg'>
                             <ArrowBackIcon />
                     </button>          
                 </div>

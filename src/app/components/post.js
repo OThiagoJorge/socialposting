@@ -17,7 +17,8 @@ const ShareIcon = dynamic(() => import('@mui/icons-material/Share'))
 const FavoriteIcon = dynamic(() => import('@mui/icons-material/Favorite'))
 const MoreHorizIcon = dynamic(() => import('@mui/icons-material/MoreHoriz'))
 
-const PostMedia = ({ mediaUrl, mediaType }) => {
+const PostMedia = ({ mediaUrl, mediaType, postid }) => {
+    const { setShowCommentsModal, setSelectedPostId } = useShowCommentsModal()
     const [hasWindow, setHasWindow] = useState(false)
 
     useEffect(() => {
@@ -30,7 +31,13 @@ const PostMedia = ({ mediaUrl, mediaType }) => {
     const isImage = ['.jpg', '.jpeg', '.png', '.gif'].includes(mediaType)
 
     return (
-        <div className='h-full'>
+        <div 
+            onClick={() => {
+                setShowCommentsModal(true)
+                setSelectedPostId(postid)
+            }}
+            className='h-full'
+        >
             {isVideo && (
                 <video 
                     src={mediaUrl} 
@@ -41,7 +48,7 @@ const PostMedia = ({ mediaUrl, mediaType }) => {
             {isImage && (
                 <img 
                     src={mediaUrl}  
-                    className='h-auto w-full object-cover mx-auto' 
+                    className='h-auto w-full object-cover mx-auto hover:cursor-pointer' 
                 />
             )}
         </div>
@@ -227,7 +234,7 @@ const Post = ({ onEventTrigger, postData }) => {
     const toggleShowMore = () => setShowMore(prev => !prev)
 
     return (
-        <div className={`relative w-full ${showCommentsModal ? 'md:w-[768px] rounded-none' : 'md:rounded-xl my-6'} md:w-[512px] mx-auto h-auto overflow-hidden border-b-4 border-gray-300`}>
+        <div className={`relative w-full ${showCommentsModal ? 'md:w-full rounded-none' : 'md:rounded-xl my-6'} md:w-[512px] mx-auto h-auto overflow-hidden border-b-4 border-gray-300`}>
             <div className={`bg-white ${showCommentsModal && postData.file ? '' : 'border-b-4 border-gray-300'}`}>
                 <div className='flex justify-between'>
                     <PostAuthor 
@@ -270,7 +277,11 @@ const Post = ({ onEventTrigger, postData }) => {
                         </>
                     )}
                 </p>
-                {postData.file && (<PostMedia mediaUrl={postData.file} mediaType={postData.extension} />)}
+                {postData.file && (<PostMedia 
+                    mediaUrl={postData.file} 
+                    mediaType={postData.extension} 
+                    postid={postData.id} 
+                />)}
             </div>
             <div className='grid grid-cols-4 content-start bg-white w-full mb-0 h-auto pb-1 mt-[7px]'>
                 <Like postId={postData.id}/>

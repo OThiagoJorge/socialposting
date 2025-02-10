@@ -273,9 +273,11 @@ const Profile = (props) => {
         </div>
       </main>
       {userD && window.location.pathname === `/${userD.slug}` && (<Publish />)}
-      {posts.map((post) => (
-        <Post onEventTrigger={handleEventTrigger} key={post.id} postData={post} />
-      ))}
+      <div className='md:mx-[512px]'>
+        {posts.map((post) => (
+          <Post onEventTrigger={handleEventTrigger} key={post.id} postData={post} />
+        ))}
+      </div>
       {showCommentsModal &&
         <CommentsModal
           post={<Post 

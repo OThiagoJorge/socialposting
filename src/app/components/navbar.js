@@ -17,7 +17,7 @@ const Icon = ({MuiIcon}) => {
     )
 }
 
-const Navbar = ({ onProfileTrigger }) => {
+const Navbar = ({ onProfileTrigger, LoginOrSignup }) => {
 
     const router = useRouter()
 
@@ -34,58 +34,53 @@ const Navbar = ({ onProfileTrigger }) => {
         if (userFromStorage) {
             setCachedUser(JSON.parse(userFromStorage));
         }
-    }, []);
+    }, [])
+
+    if (LoginOrSignup) {
+        return (
+            <div className="z-40 fixed bg-white drop-shadow-lg h-10 md:h-14 w-screen"></div>
+        )
+    }
 
     return (
-        <div className="z-40 px-3 items-center justify-between flex fixed bg-white/85 backdrop-blur-md drop-shadow-lg font-extrabold text-sm md:text-xl h-10 md:h-14 w-screen">
+        <div className="z-30 px-3 items-center justify-between flex fixed bg-white/85 backdrop-blur-md drop-shadow-lg font-extrabold text-sm md:text-xl h-10 md:h-14 w-screen">
             <a href="/" className="text-black">
                 [Social Posting]
-            </a>          
+            </a>
             {user && <div className="rounded-full">
                 <Search />
             </div>}
 
-            {user ? 
-                <div className="flex items-center">
-                    <Icon MuiIcon={ChatIcon}/>
-                    <Icon MuiIcon={NotificationsIcon}/>
-                    <button 
-                        className='rounded-full w-11 h-11 overflow-hidden hover:opacity-85'
-                        onClick={handleClickProfile}
-                    >
-                        <img 
-                            src={user?.profilePhotoUrl} 
-                        />
-                    </button>
-                </div>
-            : cachedUser ?
-                <div className="flex items-center">
-                    <Icon MuiIcon={ChatIcon}/>
-                    <Icon MuiIcon={NotificationsIcon}/>
-                    <button 
-                        className='rounded-full w-11 h-11 overflow-hidden hover:opacity-85'
-                        onClick={handleClickProfile}
-                    >
-                        <img 
-                            src={cachedUser.profilePhotoUrl} 
-                        />
-                    </button>
-                </div>
-            :
-                <a href="/login" className='flex items-center bg-marrs hover:bg-marrs/75 text-white w-auto px-3 py-1 h-auto rounded-lg'>
-                    Login
-                </a>
-            }
+            <div className="flex items-center ml-auto">
+                {user || cachedUser ? (
+                    <>
+                        <Icon MuiIcon={ChatIcon}/>
+                        <Icon MuiIcon={NotificationsIcon}/>
+                        <button 
+                            className='rounded-full w-11 h-11 overflow-hidden hover:opacity-85'
+                            onClick={handleClickProfile}
+                        >
+                            <img 
+                                src={user ? user.profilePhotoUrl : cachedUser.profilePhotoUrl} 
+                            />
+                        </button>
+                    </>
+                ) : (
+                    <a href="/login" className='flex items-center bg-marrs hover:bg-marrs/75 text-white w-auto px-3 py-1 h-auto rounded-lg'>
+                        Login
+                    </a>
+                )}
+            </div>
         </div>
     )
 }
 
 const NavBarFallback = () => {
+    const router = useRouter()
+    const { pathname } = router
     return (
         <div className="z-40 px-3 items-center justify-between flex fixed bg-white drop-shadow-lg font-extrabold text-sm md:text-xl h-10 md:h-14 w-screen">
-            <a href="/" className="text-black">
-                [Social Posting]
-            </a>          
+                     
             <div className="flex items-center">
                 <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900"></div>
             </div>
