@@ -3,6 +3,7 @@
 import '@/globals.css'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
+import { useRouter } from 'next/navigation'
 
 const PostAuthor = ({ onEventTrigger, name, photoUrl, postData }) => {
     let hoverTimeout
@@ -41,12 +42,15 @@ const PostAuthor = ({ onEventTrigger, name, photoUrl, postData }) => {
         return postDateObj.format(dateFormat)
     }
 
+    const router = useRouter()
+
     return (
         <div className='flex items-center px-4 pt-4 pb-2'>
             <button 
                 className='rounded-full w-12 h-12 overflow-hidden hover:opacity-85'
                 onMouseOver={handleMouseOver}
                 onMouseOut={handleMouseOut}
+                onClick={() => postData.slug && router.push(`/${postData.slug}`)}
             >
                 <img 
                     src={photoUrl} 
@@ -55,7 +59,10 @@ const PostAuthor = ({ onEventTrigger, name, photoUrl, postData }) => {
                 />
             </button>
             <div className='grid grid-rows-2'>
-                <a className='ml-3 cursor-pointer'>
+                <a 
+                    className='ml-3 cursor-pointer'
+                    onClick={() => postData.slug && router.push(`/${postData.slug}`)}
+                >
                     <h1 
                         className='font-extrabold text-lg hover:underline'
                         onMouseOver={handleMouseOver}

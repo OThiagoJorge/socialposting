@@ -47,7 +47,7 @@ const Navbar = ({ onProfileTrigger, LoginOrSignup }) => {
             <a href="/" className="text-black">
                 [Social Posting]
             </a>
-            {user && <div className="rounded-full">
+            {false && <div className="rounded-full">
                 <Search />
             </div>}
 

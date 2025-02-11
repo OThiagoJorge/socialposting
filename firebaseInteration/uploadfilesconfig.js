@@ -90,7 +90,8 @@ const handleSubmitPost = async (e) => {
             text: text || "",
             file: fileUrl || "",
             extension: fileExtension ? `.${fileExtension}` : "",
-            timestamp: new Date()
+            timestamp: new Date(),
+            slug: slug || ""
         })
         console.log("Post criado com sucesso")
         location.reload()

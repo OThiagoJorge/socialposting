@@ -57,7 +57,6 @@ const PostMedia = ({ mediaUrl, mediaType, postid }) => {
 
 const Like = ({ postId }) => {
     const { showCommentsModal } = useShowCommentsModal()
-    
     const { user } = useAuth()
     const [heartRed, setHeart] = useState(false)
     const [sumOfLikes, setSumOfLikes] = useState(0)
@@ -124,27 +123,26 @@ const Like = ({ postId }) => {
     }
 
     useEffect(() => {
-        if (user) {
-            const fetchLikes = async () => {
-                try {
-                    const docRef = doc(db, `feed/${postId}/interations`, 'likes')
-                    const docSnap = await getDoc(docRef)
-                    if (docSnap.exists()) {
-                        const data = docSnap.data()
-                        setSumOfLikes(data.sumOfLikes || 0)
-                        if (data.userLikes && data.userLikes[user.uid]) {
-                            setHeart(true)
-                        }else {
-                            setHeart(false)
-                        }
+        const fetchLikes = async () => {
+            try {
+                const docRef = doc(db, `feed/${postId}/interations`, 'likes')
+                const docSnap = await getDoc(docRef)
+                if (docSnap.exists()) {
+                    const data = docSnap.data()
+                    setSumOfLikes(data.sumOfLikes || 0)
+                    // Only set the heart state if a user is logged in
+                    if (user && data.userLikes && data.userLikes[user.uid]) {
+                        setHeart(true)
+                    } else {
+                        setHeart(false)
                     }
-                } catch (error) {
-                    console.error("Erro ao buscar curtidas: ", error.message)
                 }
+            } catch (error) {
+                console.error("Erro ao buscar curtidas: ", error.message)
             }
-            fetchLikes()
         }
-    }, [user, setSumOfLikes, postId, showCommentsModal])
+        fetchLikes()
+    }, [user, postId, showCommentsModal])
 
     const toggleHeartChange = () => setHeart(prev => !prev)
 
@@ -156,7 +154,7 @@ const Like = ({ postId }) => {
             >
                 {heartRed ? (
                     <FavoriteIcon 
-                        className='cursor-pointe text-red-600' 
+                        className='cursor-pointer text-red-600' 
                         onClick={toggleHeartChange} 
                     />
                 ) : (
@@ -228,7 +226,7 @@ const Post = ({ onEventTrigger, postData }) => {
             setTextPart1(postData.text)
             setTextPart2("")
         }
-    }, [postData.text])
+    }, [postData])
 
     const handleEventTrigger = (isHoverProfile) => onEventTrigger(isHoverProfile)
     const toggleShowMore = () => setShowMore(prev => !prev)
